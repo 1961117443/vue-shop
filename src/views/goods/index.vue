@@ -2,57 +2,79 @@
     <!-- 分类页面 -->
     <div class="goods-container">
         <van-search placeholder="请输入搜索关键词" v-model="value" shape="round"/>
-        <!-- <van-tree-select
-        height="100%"
+        <van-tree-select
+        height="calc(100vh - 104px)"
         :items="items"
         :main-active-index.sync="activeIndex"
+        @click-nav="onClickNav"
+        @click-item="onClickItem"
         >
         <template slot="content">
-            <van-image v-if="activeIndex === 0" src="https://img.yzcdn.cn/vant/apple-1.jpg" />
-            <van-image v-if="activeIndex === 1" src="https://img.yzcdn.cn/vant/apple-2.jpg" />
-            <van-grid :column-num="3" v-if="activeIndex === 2">
+            <van-image src="https://img.yzcdn.cn/vant/apple-1.jpg" />
+            <van-grid :column-num="2" :border="false">
                 <van-grid-item
-                    v-for="value in 15"
-                    :key="value"
+                    v-for="gitem in gridItems"
+                    :key="gitem.id"
                     icon="photo-o"
                     text="文字"
+                    @click="onClickGridItem(gitem)"
                 >
-                    <van-image src="https://img.yzcdn.cn/vant/apple-2.jpg" >文字</van-image>
+                    <van-image src="https://img.yzcdn.cn/vant/apple-2.jpg" ></van-image>
+                    <span>{{gitem.text}}</span>
                 </van-grid-item>
+               
             </van-grid>
         </template>
-        </van-tree-select> -->
-        <!-- <h1>分类</h1> -->
-        <van-sidebar v-model="activeKey">
-        <van-sidebar-item title="标签名称" dot v-for="value in 10" :key="value" />
-        <van-sidebar-item title="标签名称" info="5" />
-        <van-sidebar-item title="标签名称" info="99+" />
-        </van-sidebar>
+        </van-tree-select>
     </div>
 </template>
 
 <script>
-import { TreeSelect ,Image ,Search,Grid, GridItem ,Sidebar, SidebarItem } from 'vant';
+import { TreeSelect ,Image ,Search,Grid, GridItem } from 'vant';
     export default {
         components:{
             [TreeSelect .name]:TreeSelect,
             [Image .name]:Image,
             [Search .name]:Search,
             [Grid.name]:Grid,
-            [GridItem.name]:GridItem,
-            [Sidebar.name]:Sidebar,
-            [SidebarItem.name]:SidebarItem
+            [GridItem.name]:GridItem
         },
         data() {
-            return {
-            activeKey: 0,
+            return { 
             activeIndex: 0,
-            items: [{ text: '分组 1',id:1 }, { text: '分组 2',id:2 },{ text: '分组 3',id:3 }, { text: '分组 4',id:4 },
-            { text: '分组 1',id:1 }, { text: '分组 2',id:2 },{ text: '分组 3',id:3 }, { text: '分组 4',id:4 },
-            { text: '分组 1',id:1 }, { text: '分组 2',id:2 },{ text: '分组 3',id:3 }, { text: '分组 4',id:4 },
-            { text: '分组 1',id:1 }, { text: '分组 2',id:2 },{ text: '分组 3',id:3 }, { text: '分组 4',id:4 }],
+            items: [],
+            //{items.id,[]}
+            gridItems:[], 
             value:""
             };
+        },
+        mounted(){
+            this.getCateoryList()
+            this.getCateoryItemList({id:0})
+        },
+        methods:{
+            onClickNav(data){  
+                 let id= this.items[data].id 
+                this.getCateoryItemList({id})
+            },
+            onClickItem(data){
+                console.log(data)
+            },
+            onClickGridItem(data){
+                 console.log(data)
+            },
+            getCateoryList(){
+                this.$http.get('api/goods/category',{id:""}).then(res=>{
+                    this.items = res
+                })
+            },
+            getCateoryItemList({id}){
+                let list=[]
+                for (let index = 1; index <= 10; index++) {
+                    list.push({ id:id+'_' + index, text: '子系列' + '_' + index })
+                }
+                this.gridItems = list 
+            }
         }
     }
 </script>

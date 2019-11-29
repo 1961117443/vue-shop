@@ -2,11 +2,10 @@
   <div class="home-container">
     <!-- <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <div class="info">
-      <transition name="fade">
+ 
+    <transition name="fade">
         <router-view/>
-      </transition> 
-    </div>
+    </transition> 
 
     
     <van-tabbar v-model="active">
@@ -39,9 +38,8 @@ export default {
 
 <style lang="scss" scoped>
 .home-container{
-  .info{
-    overflow: hidden; 
-    .fade-enter {
+  overflow: hidden; 
+  .fade-enter {
       opacity: 0;
       transform: translateX(100%);
     }
@@ -53,8 +51,6 @@ export default {
     .fade-enter-active,.fade-leave-active {
       transition: all 0.2s ease;
     }
-  }
-  
 }
 
 </style>
