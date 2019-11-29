@@ -20,8 +20,13 @@
     "@vue/cli-plugin-vuex": "^4.0.0",
     "@vue/cli-service": "^4.0.0",
     "babel-plugin-import": "^1.13.0",
+    "css-loader": "^3.2.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "node-sass": "^4.13.0",
+    "sass": "^1.23.7",
     "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.1",
     "vant": "^2.2.14",
     "vue-template-compiler": "^2.6.10"
   },

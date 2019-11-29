@@ -46,26 +46,31 @@ export default {
 </script>
  
 <style  lang="scss" scoped>
-.user-contatiner {
-  .user-poster {
-    width: 100%;
-    height: 53vw;
-    display: block;
-  }
+.card-goods {
+  padding: 10px 0;
+  background-color: #fff;
 
-  .user-group {
-    margin-bottom: 15px;
-  }
+  &__item {
+    position: relative;
+    background-color: #fafafa;
 
-  .user-links {
-    padding: 15px 0;
-    font-size: 12px;
-    text-align: center;
-    background-color: #fff;
+    .van-checkbox__label {
+      width: 100%;
+      height: auto; // temp
+      padding: 0 10px 0 15px;
+      box-sizing: border-box;
+    }
 
-    .van-icon {
-      display: block;
-      font-size: 24px;
+    .van-checkbox__icon {
+      top: 50%;
+      left: 10px;
+      z-index: 1;
+      position: absolute;
+      margin-top: -10px;
+    }
+
+    .van-card__price {
+      color: #f44;
     }
   }
 }

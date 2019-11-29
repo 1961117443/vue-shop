@@ -6,6 +6,7 @@
       finished-text="没有更多了"
       @load="onLoad"
     >
+      <van-cell title="商品详情页面" is-link to="/goods/info" />
       <van-cell
         v-for="item in list"
         :key="item"
