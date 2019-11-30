@@ -7,28 +7,50 @@
       :goods-id="goodsId"
       :quota="quota" 
       :hide-stock="true"
-      :message-config="messageConfig"
       @buy-clicked="onBuyClicked"
       @add-cart="onAddCartClicked"
-    />
+    >
+      <!-- 自定义 sku-group -->
+      <template slot="sku-group" slot-scope="props"> 
+        <van-cell-group>
+          <van-cell title="单元格0" is-link />
+          <van-cell title="单元格1" is-link />
+          <van-cell is-link>
+            <!-- 使用 title 插槽来自定义标题 -->
+            <template slot="title"> 
+              <van-stepper v-model="length" />
+            </template>
+          </van-cell>
+          <van-cell v-for="item in props.tree" :key="item.k" :title="item.k" value="内容" /> 
+
+          <van-cell v-for="item in props.list" :title="item.id" :key="item.id" is-link  :value="item.id"/>
+        </van-cell-group>
+      </template>
+    </van-sku>
   </div>
 </template>
 
 <script>
-import { Sku } from "vant";
+import {  Cell, CellGroup , Sku,Switch,Stepper   } from "vant";
 export default {
   name:'goods-sku',
   components: {
-    [Sku.name]: Sku
+    [Sku.name]: Sku,
+    [Cell.name]: Cell,
+    [CellGroup.name]: CellGroup,
+    [Switch.name]: Switch,
+    [Stepper.name]: Stepper
   },
   model:{
-      prop:'visable',
+      prop:'visible',
       event:'change'
   },
-  props:['visable'],
+  props:['visible'],
   data() {
     return {
+      checked:true,
       show: false, 
+      length:1,
       goodsId:0,
       quota:0, 
       sku: {
@@ -37,6 +59,84 @@ export default {
         tree: [
           {
             k: "颜色", // skuKeyName：规格类目名称
+            v: [
+              {
+                id: "30349", // skuValueId：规格值 id
+                name: "红色", // skuValueName：规格值名称
+                imgUrl: "https://img.yzcdn.cn/1.jpg", // 规格类目图片，只有第一个规格类目可以定义图片
+                previewImgUrl: "https://img.yzcdn.cn/1p.jpg" // 用于预览显示的规格类目图片
+              },
+              {
+                id: "1215",
+                name: "蓝色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg",
+                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
+              },
+              {
+                id: "1215",
+                name: "蓝色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg",
+                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
+              },
+              {
+                id: "1215",
+                name: "蓝色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg",
+                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
+              },
+              {
+                id: "1215",
+                name: "蓝色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg",
+                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
+              },
+              {
+                id: "1215",
+                name: "蓝色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg",
+                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
+              },
+              {
+                id: "1215",
+                name: "蓝色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg",
+                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
+              },
+              {
+                id: "1215",
+                name: "蓝色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg",
+                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
+              },
+              {
+                id: "1215",
+                name: "蓝色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg",
+                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
+              },
+              {
+                id: "1215",
+                name: "蓝色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg",
+                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
+              },
+              {
+                id: "1215",
+                name: "蓝色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg",
+                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
+              },
+              {
+                id: "1215",
+                name: "蓝色",
+                imgUrl: "https://img.yzcdn.cn/2.jpg",
+                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
+              }
+            ],
+            k_s: "s1" // skuKeyStr：sku 组合列表（下方 list）中当前类目对应的 key 值，value 值会是从属于当前类目的一个规格值 id
+          },
+          {
+            k: "颜色2", // skuKeyName：规格类目名称
             v: [
               {
                 id: "30349", // skuValueId：规格值 id
@@ -92,17 +192,15 @@ export default {
   },
   methods:{
       onBuyClicked(data){
-        //this.$emit('change1',this.show1)
       },
       onAddCartClicked(data){
-         // this.$emit('change1',this.show1)
       }
   },
   watch:{
       show(n,o){ 
           this.$emit('change',n)
       },
-      visable(n,o){
+      visible(n,o){
         this.show = n
       }
   }

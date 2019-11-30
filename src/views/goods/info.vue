@@ -17,7 +17,7 @@
       </van-cell>
     </van-cell-group>
 
-    <van-cell-group class="goods-cell-group">
+    <!-- <van-cell-group class="goods-cell-group">
       <van-cell value="进入店铺" icon="shop-o" is-link @click="sorry">
         <template slot="title">
           <span class="van-cell-text">有赞的店</span>
@@ -25,7 +25,7 @@
         </template>
       </van-cell>
       <van-cell title="线下门店" icon="location-o" is-link @click="sorry" />
-    </van-cell-group>
+    </van-cell-group> -->
 
     <van-cell-group class="goods-cell-group">
       <van-cell title="查看商品详情" is-link @click="sorry" />
