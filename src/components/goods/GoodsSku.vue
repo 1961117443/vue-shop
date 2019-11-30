@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-sku
-      v-model="show1"
+      v-model="show"
       :sku="sku"
       :goods="goods"
       :goods-id="goodsId"
@@ -17,18 +17,18 @@
 <script>
 import { Sku } from "vant";
 export default {
+  name:'goods-sku',
   components: {
     [Sku.name]: Sku
   },
   model:{
-      prop:'showSku',
+      prop:'visable',
       event:'change'
   },
-  props:['showSku','goodsSku2'],
+  props:['visable'],
   data() {
     return {
-      show1: this.showSku,
-      val: this.goodsSku2,
+      show: false, 
       goodsId:0,
       quota:0, 
       sku: {
@@ -92,19 +92,18 @@ export default {
   },
   methods:{
       onBuyClicked(data){
-
+        //this.$emit('change1',this.show1)
       },
       onAddCartClicked(data){
-
+         // this.$emit('change1',this.show1)
       }
   },
   watch:{
-      showSku:function(newVal,oldVal){
-          this.show1 = newVal
-          this.$emit('input',newVal)
+      show(n,o){ 
+          this.$emit('change',n)
       },
-      goodsSku2:function(newVal,oldVal){
-          console.log('goodsSku2')
+      visable(n,o){
+        this.show = n
       }
   }
 };
