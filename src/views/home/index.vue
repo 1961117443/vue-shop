@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div  ref="container1">
     <van-list
       v-model="loading"
       :finished="finished"
@@ -13,6 +13,7 @@
       
       <van-cell title="测试数据绑定"  @click="testBindClick" :value="order.bzName"/>
 
+      <cell-select :list="list3" title="包装方式"></cell-select>
     </van-cell-group>
       <van-cell
         v-for="item in list"
@@ -41,6 +42,7 @@
 <script>
   import { List,Cell,CellGroup,Popup,Sticky  } from 'vant';
   import ChooseItem from '@/components/ChooseItem.vue'
+  import CellSelect from '@/components/CellSelect'
   export default {
     components:{
       [List.name]:List,
@@ -48,12 +50,14 @@
       [ChooseItem.name]:ChooseItem,
       [Popup.name]:Popup,
       [CellGroup.name]:CellGroup,
-      [Sticky.name]:Sticky
+      [Sticky.name]:Sticky,
+      [CellSelect.name]:CellSelect
     },
     data() {
       return {
         list: [],
         list2: [],
+        list3: [],
         loading: false,
         finished: false,
         showBindPopup:false,
@@ -65,6 +69,9 @@
     },
     mounted(){
       this.getPackingCategory()
+      for (let i = 0; i < 20; i++) {
+            this.list3.push( {id:i,text:""+i});
+          } 
     },
     methods: {
       testBindClick(){
