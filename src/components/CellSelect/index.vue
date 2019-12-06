@@ -18,13 +18,15 @@
             />
             <van-search placeholder="请输入搜索关键词" v-model="searchValue" />
             </van-sticky>
-           <van-radio-group v-model="check">
+           <div class="cell-select-items" slot="items">
+               <van-radio-group v-model="check">
                 <van-cell-group>
                     <van-cell v-for="item in list" :key="item.id" clickable @click="check=item.id" class="van-ellipsis--l2">
                         <van-radio :name="item.id">{{item.text}}</van-radio>
                     </van-cell>
                 </van-cell-group>
             </van-radio-group>
+           </div>
         </van-popup>
     </div>
 </template>
