@@ -51,7 +51,14 @@ import {  Cell,CellGroup,RadioGroup,Radio,NavBar,Sticky,Search    } from 'vant';
 
             },
             onClickRight(){ 
-                this.$emit('onChoose', this.list[this.check])
+                let data = {}
+                this.list.some(item=>{
+                    if (item.id==this.check) {
+                        data = item
+                        return true
+                    }
+                })  
+                this.$emit('onChoose', data)
             }
         }
     }

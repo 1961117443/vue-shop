@@ -37,6 +37,18 @@ const routes = [
     path: '/goods/info',
     name: '/goods/info',
     component: () => import('../views/goods/info.vue')
+  },
+  {
+    path: '/order',
+    name: 'order',
+    component: () => import('../views/order/index.vue') ,
+    children:[
+      // {
+      //   path: '/order/info/:id',
+      //   name: '/order/info',
+      //   component: () => import('../views/order/info.vue')
+      // }
+    ]
   }
 ]
 

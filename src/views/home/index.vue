@@ -11,9 +11,9 @@
         <van-cell title="商品详情页面" is-link to="/goods/info" />
       </van-sticky>
       
-      <van-cell title="测试数据绑定"  @click="testBindClick" :value="order.bzName"/>
+      <van-cell title="测试数据绑定"  @click="testBindClick" :value="order.k1_text"/>
 
-      <cell-select :list="list3" title="包装方式"></cell-select>
+      <cell-select :list="list2" title="包装" required :data="order" value-member="k1" display-member="k1_text"></cell-select>
     </van-cell-group>
       <van-cell
         v-for="item in list"
@@ -62,16 +62,15 @@
         finished: false,
         showBindPopup:false,
         order:{
-          k1:-1,
-          bzName:""
+          k1:2,
+          k1_text:"单支隔珍珠棉，外套无字收缩膜",
+          k2:-1,
+          number:1
         }
       };
     },
     mounted(){
       this.getPackingCategory()
-      for (let i = 0; i < 20; i++) {
-            this.list3.push( {id:i,text:""+i});
-          } 
     },
     methods: {
       testBindClick(){
@@ -83,8 +82,8 @@
         })
       },
       onChoose(data){
-        this.order.bzName = data.text
         this.order.k1 = data.id 
+        this.order.k1_text = data.text
         this.showBindPopup = false;
       },
       onLoad() {

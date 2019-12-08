@@ -60,6 +60,55 @@ export default {
         price: 2680,
         num: 1,
         thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/320454216bbe9e25c7651e1fa51b31fd.jpeg'
+      }, {
+        id: '31',
+        title: '美国伽力果',
+        desc: '约680g/3个',
+        price: 2680,
+        num: 1,
+        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/320454216bbe9e25c7651e1fa51b31fd.jpeg'
+      }, {
+        id: '32',
+        title: '美国伽力果',
+        desc: '约680g/3个',
+        price: 2680,
+        num: 1,
+        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/320454216bbe9e25c7651e1fa51b31fd.jpeg'
+      }, {
+        id: '33',
+        title: '美国伽力果',
+        desc: '约680g/3个',
+        price: 2680,
+        num: 1,
+        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/320454216bbe9e25c7651e1fa51b31fd.jpeg'
+      }, {
+        id: '34',
+        title: '美国伽力果',
+        desc: '约680g/3个',
+        price: 2680,
+        num: 1,
+        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/320454216bbe9e25c7651e1fa51b31fd.jpeg'
+      }, {
+        id: '35',
+        title: '美国伽力果',
+        desc: '约680g/3个',
+        price: 2680,
+        num: 1,
+        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/320454216bbe9e25c7651e1fa51b31fd.jpeg'
+      }, {
+        id: '36',
+        title: '美国伽力果',
+        desc: '约680g/3个',
+        price: 2680,
+        num: 1,
+        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/320454216bbe9e25c7651e1fa51b31fd.jpeg'
+      }, {
+        id: '37',
+        title: '美国伽力果',
+        desc: '约680g/3个',
+        price: 2680,
+        num: 1,
+        thumb: 'https://img.yzcdn.cn/public_files/2017/10/24/320454216bbe9e25c7651e1fa51b31fd.jpeg'
       }]
     };
   },
@@ -90,8 +139,7 @@ export default {
 <style lang="less" scoped>
 .card-goods {
   padding: 10px 0;
-  background-color: #fff;
-
+  background-color: #fff; 
   &__item {
     position: relative;
     background-color: #fafafa;
@@ -113,7 +161,10 @@ export default {
 
     .van-card__price {
       color: #f44;
-    }
+    } 
   }
+  .van-submit-bar{
+      bottom: 50px;
+    }
 }
 </style>

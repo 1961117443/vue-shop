@@ -102,7 +102,7 @@ export default {
     },
 
     onClickCart() {
-      this.$router.push('cart');
+      this.$router.push('/cart');
     },
     sorry() { 
         this.show = true
