@@ -6,15 +6,21 @@
         left-arrow
         @click-left="onClickLeft"
         />
-        <van-tabs v-model="active" :swipe-threshold="5">
-            <van-tab title="全部" >全部</van-tab>
-            <van-tab title="待审价">待议价</van-tab>
-            <van-tab title="待付款">待付款</van-tab>
+        <van-tabs v-model="active" :swipe-threshold="5" sticky>
+            <van-tab title="全部" >
+                <order-list kind="0"/>
+            </van-tab>
+            <van-tab title="待审价">
+                <order-list kind="1"/>
+            </van-tab>
+            <van-tab title="待付款">
+                <order-list kind="2"/>
+            </van-tab>
             <van-tab title="待生产">
-                <order-list></order-list>
+                <order-list kind="3"></order-list>
             </van-tab>
             <van-tab title="待发货">
-                <order-list></order-list>
+                <order-list kind="4"></order-list>
             </van-tab>
         </van-tabs>
         <router-view/>
