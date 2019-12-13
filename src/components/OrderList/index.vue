@@ -33,21 +33,32 @@
                 value:""
             }
         },
+        updated(){
+            console.log(this.kind)
+        },
         methods:{
             onLoad() {
                 // 异步更新数据
                 setTimeout(() => {
-                for (let i = 0; i < 10; i++) {
-                    this.list.push({code:this.kind+"-"+i});
-                }
-                // 加载状态结束
-                this.loading = false;
+                    if(this.kind!="2"){
+                        for (let i = 0; i < 10; i++) {
+                            this.list.push({code:this.kind+"-"+i});
+                        }
+                    }
+                    // 加载状态结束
+                    this.loading = false;
 
-                // 数据全部加载完成
-                if (this.list.length >= 40) {
-                    this.finished = true;
-                }
-                }, 500);
+                    if(this.kind=="2"){
+                         this.finished = true;
+                         
+                    } 
+                    
+
+                    // 数据全部加载完成
+                    if (this.kind!="0" && this.list.length >= 40) {
+                        this.finished = true; 
+                    }
+                    }, 500);
             }
         }
     }
