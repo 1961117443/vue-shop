@@ -28,7 +28,7 @@ module.exports = {
   // },
   devServer: {
     disableHostCheck: true,
-    host: '192.168.1.104',
+    host: process.env.HOST === undefined? 'localhost' : process.env.HOST,
     port: '9192',
     hot: true,
     open: true,

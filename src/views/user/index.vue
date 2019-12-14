@@ -6,16 +6,16 @@
     />
     <van-row class="user-links">
       <van-col span="6">
-        <van-icon name="pending-payment" />待付款
+        <van-icon name="records" @click="onLinkClick('sj')"/>待审价
       </van-col>
       <van-col span="6">
-        <van-icon name="records" />待接单
+        <van-icon name="pending-payment" @click="onLinkClick('fk')" />待付款
       </van-col>
       <van-col span="6">
-        <van-icon name="tosend" />待发货
+        <van-icon name="tosend" @click="onLinkClick('sc')"/>待生产
       </van-col>
       <van-col span="6">
-        <van-icon name="logistics" />已发货
+        <van-icon name="logistics" @click="onLinkClick('fh')"/>已发货
       </van-col>
     </van-row>
 
@@ -41,6 +41,11 @@ export default {
     [Icon.name]: Icon,
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup
+  },
+  methods:{
+    onLinkClick(name){
+      this.$router.push({path:'/order',query:{tab:name}})
+    }
   }
 };
 </script>

@@ -6,30 +6,23 @@
         left-arrow
         @click-left="onClickLeft"
         />
-        <van-tabs v-model="active" :swipe-threshold="5" sticky>
-            <van-tab title="全部" >
-                <order-list kind="0"/>
-            </van-tab>
-            <van-tab title="待审价">
-                <order-list kind="1"/>
-            </van-tab>
-            <van-tab title="待付款">
-                <order-list kind="2"/>
-            </van-tab>
-            <van-tab title="待生产">
-                <order-list kind="3"></order-list>
-            </van-tab>
-            <van-tab title="待发货">
-                <order-list kind="4"></order-list>
+        <van-tabs 
+        sticky :replace="true"
+        v-model="activeName" 
+        :swipe-threshold="5" 
+         @change="onTabChange"
+        >
+            <van-tab v-for="tab in tabs" :key="tab.name" :name="tab.name" :title="tab.title" >
+                <router-view/>
             </van-tab>
         </van-tabs>
-        <router-view/>
+        
     </div>
 </template>
 
 <script>
     import { Tab, Tabs,NavBar  } from 'vant';
-    import OrderList from '@/components/OrderList'
+    import OrderList from '@/components/Order/OrderList.vue'
     export default {
         components:{
             [Tab.name]:Tab,
@@ -39,12 +32,38 @@
         },
         data() {
             return {
-                active: 0
+                active: 0,
+                activeName:"sj",
+                tabs:[
+                    {name:"sj",title:"待审价"},
+                    {name:"fk",title:"待付款"},
+                    {name:"sc",title:"待生产"},
+                    {name:"fh",title:"已发货"},
+                    {name:"qb",title:"全部"}
+                ]
             };
+        },
+        created(){
+            if (this.$route.query.tab) {
+                this.tabs.some(item=> {
+                    if (item.name==this.$route.query.tab) {
+                        this.activeName = item.name
+                        return true
+                    }
+                })
+                
+            }
+        },
+        mounted(){
+            this.onTabChange(this.activeName)
         },
         methods:{
             onClickLeft(){
                 this.$router.go(-1)
+            },
+            onTabChange(name){ 
+               this.$router.replace('/order/list/'+name)
+                
             }
         }
     }

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import OrderCard from '@/components/OrderList/OrderCard.vue'
+    import OrderCard from '@/components/Order/OrderCard.vue'
     import { List, Field,Cell,CellGroup } from 'vant'
     export default {
         name:'OrderList',

@@ -43,11 +43,11 @@ const routes = [
     name: 'order',
     component: () => import('../views/order/index.vue') ,
     children:[
-      // {
-      //   path: '/order/info/:id',
-      //   name: '/order/info',
-      //   component: () => import('../views/order/info.vue')
-      // }
+      {
+        path: 'list/:id',
+        name: 'list',
+        component: () => import('../views/order/list.vue')
+      }
     ]
   }
 ]
