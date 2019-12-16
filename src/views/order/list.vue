@@ -54,15 +54,13 @@ import OrderCard from '@/components/Order/OrderCard.vue'
                     this.count++;
                 }, 500);
             },
-            onLoad() {
+            onLoad() {  
+                
                 // 异步更新数据
                 setTimeout(() => {
                     let start = this.list.length
                     if(this.id!="sc"){
-                        for (let i = 0; i < 10; i++) {
-                            let v = start+i
-                            this.list.push({code:this.id+"-"+v});
-                        }
+                        this.getOrder()
                     }
                     // 加载状态结束
                     this.loading = false;
@@ -81,6 +79,12 @@ import OrderCard from '@/components/Order/OrderCard.vue'
                         this.finished = true; 
                     }
                     }, 500);
+            },
+            //获取订单
+            getOrder(){
+                this.$http.get('api/order/list?type=sj').then(res=>{
+                    this.list =res
+                })
             }
         }
     }
