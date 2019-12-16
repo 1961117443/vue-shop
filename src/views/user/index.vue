@@ -6,16 +6,16 @@
     />
     <van-row class="user-links">
       <van-col span="6">
-        <van-icon name="records" @click="onLinkClick('sj')"/>待审价
+        <van-icon name="records" :info="stateCounts.sj" @click="onLinkClick('sj')"/>待审价
       </van-col>
       <van-col span="6">
-        <van-icon name="pending-payment" @click="onLinkClick('fk')" />待付款
+        <van-icon name="pending-payment" :info="stateCounts.fk" @click="onLinkClick('fk')" />待付款
       </van-col>
       <van-col span="6">
-        <van-icon name="tosend" @click="onLinkClick('sc')"/>待生产
+        <van-icon name="tosend" :info="stateCounts.sc" @click="onLinkClick('sc')"/>待生产
       </van-col>
       <van-col span="6">
-        <van-icon name="logistics" @click="onLinkClick('fh')"/>已发货
+        <van-icon name="logistics" :info="stateCounts.fh" @click="onLinkClick('fh')"/>已发货
       </van-col>
     </van-row>
 
@@ -42,9 +42,22 @@ export default {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup
   },
+  data(){
+    return {
+      stateCounts:{}
+    }
+  },
+  mounted(){
+    this.getInfoCount()
+  },
   methods:{
     onLinkClick(name){
       this.$router.push({path:'/order',query:{tab:name}})
+    },
+    getInfoCount(){
+      this.$http.get('api/order/state/count').then(res=>{
+        this.stateCounts = res
+      })
     }
   }
 };
@@ -69,6 +82,10 @@ export default {
       font-size: 24px;
     }
   }
+}
+.van-info{
+  top:5px;
+  right: 15px;
 }
 </style>
  

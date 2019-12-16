@@ -3,6 +3,10 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
+const VueRouterPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(to){
+  return VueRouterPush.call(this,to).catch(err=> console.log(err))
+}
 
 const routes = [
   {
@@ -45,10 +49,15 @@ const routes = [
     children:[
       {
         path: 'list/:id',
-        name: 'list',
+        name: '/order/list/:id',
         component: () => import('../views/order/list.vue')
       }
     ]
+  },
+  {
+    path: '/order/detail/:id',
+    name: '/order/detail/:id',
+    component: () => import('../views/order/detail.vue')
   }
 ]
 
@@ -56,6 +65,6 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+}) 
 
 export default router

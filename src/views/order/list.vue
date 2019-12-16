@@ -29,6 +29,7 @@ import OrderCard from '@/components/Order/OrderCard.vue'
         props:['kind'],
         data(){
             return{
+                pageIndex:1,
                 list: [], 
                 loading: false,
                 finished: false,
@@ -55,36 +56,22 @@ import OrderCard from '@/components/Order/OrderCard.vue'
                 }, 500);
             },
             onLoad() {  
-                
-                // 异步更新数据
-                setTimeout(() => {
-                    let start = this.list.length
-                    if(this.id!="sc"){
-                        this.getOrder()
+                //获取订单数据
+                this.$http.get('api/order/list?type='+this.id,{pageIndex:this.pageIndex,pageSize:5}).then(res=>{
+                    //加载状态结束
+                    this.loading = false
+                    //数据全部加载完成
+                    if (res.length==0) {
+                        this.finished = true
+                    }else{
+                        //页码加1
+                        this.pageIndex++
+                        //数据添加到list
+                        res.forEach(item => {
+                            this.list.push(item)
+                        })
                     }
-                    // 加载状态结束
-                    this.loading = false;
-
-                    if(this.id=="fk"){
-                         this.finished = true; 
-                    } 
-
-                    if (this.list.length==0) {
-                        this.finished = true;  
-                    }
-                    
-
-                    // 数据全部加载完成
-                    if (this.id!="0" && this.list.length >= 40) {
-                        this.finished = true; 
-                    }
-                    }, 500);
-            },
-            //获取订单
-            getOrder(){
-                this.$http.get('api/order/list?type=sj').then(res=>{
-                    this.list =res
-                })
+                }) 
             }
         }
     }

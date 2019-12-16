@@ -1,31 +1,28 @@
 <template>
     <div class="order-card-container">
-        <van-panel :title="order.code">
+        <van-panel :title="order.code" @click="onClick">
             <van-row class="van-cell info">
                 <van-col span="18">
-                    <van-swipe indicator-color="red"> 
-                        <van-swipe-item v-for="(item,index) in detail" :key="index">
+                    <van-swipe @change="onChange"> 
+                        <van-swipe-item v-for="(item,index) in order.detail" :key="index">
                             <order-item-card :item="item"></order-item-card>
                         </van-swipe-item>
+                        <div class="custom-indicator" slot="indicator">
+                            {{ current + 1 }}/{{order.detail.length}}
+                        </div>
                     </van-swipe>
                 </van-col>
                 <van-col span="6" class="desc van-hairline--left">
-                    <!-- <van-circle
-                    v-model="currentRate"
-                    text="订单进度"
-                    :stroke-width="60"
-                    size="80px"
-                    /> -->
                     <p class="desc-money"><span>￥{{order.money}}</span></p>
                     <p class="desc-info">{{order.number}}<span class="danwei">支</span></p>
-                    <p class="desc-info">{{order.weight}}<span class="danwei">吨</span></p>
+                    <p class="desc-info">{{(order.weight*0.001).toFixed(2)}}<span class="danwei">吨</span></p>
                 </van-col> 
             </van-row>
              
-            <!-- <div slot="footer">
-                <van-button size="mini" round>按钮</van-button>
-                <van-button size="mini" round>按钮</van-button>
-            </div> -->
+            <div slot="footer">
+                <van-button size="mini" round>关闭</van-button>
+                <van-button size="mini" round>审价</van-button>
+            </div>
         </van-panel>
     </div>
 </template>
@@ -48,26 +45,19 @@
         props:['order'],
         data(){
             return{
-                currentRate: 0 ,
-                detail:[
-                    {
-                        xh:'021-HY106',
-                        bm:"氧化平光古铜/JT（非标）",
-                        bz:"单支隔珍珠棉，外套无字收缩膜",
-                        cz:"6063-T5",
-                        bh:"0.7",
-                        cd:6.4,
-                        mz:0.366,
-                        sl:455,
-                        zl:1065.792
-                    }
-                ]
+                current:0,
+                currentRate: 0
+            }
+        },
+        methods:{
+            onChange(index){
+                this.current = index;
+            },
+            onClick(){ 
+                this.$router.push('/order/detail/'+this.order.code)
             }
         },
         computed:{
-            title(){
-                return "订单号:" + this.order.code
-            }
         }
     }
 </script>
@@ -84,7 +74,7 @@
         
         .info{
             font-size: 12px;
-            height: 22vh;
+            height: 160px;
             border: 1px;
             border-color: red;
             padding: 0 0; 
@@ -105,13 +95,23 @@
                 }
                 .desc-info{
                     text-align: right; 
-                    font-size: 8px;
+                    font-size: 11px;
                 }
             }
             
         }
         .danwei{
             font-weight: bold;
+        }
+
+        .custom-indicator {
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+            padding: 2px 5px;
+            color: #fff;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.1);
         }
     }
 </style>

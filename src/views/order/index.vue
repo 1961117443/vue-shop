@@ -7,10 +7,13 @@
         @click-left="onClickLeft"
         />
         <van-tabs 
-        sticky :replace="true"
+        swipeable
+        sticky 
+        :replace="true"
         v-model="activeName" 
         :swipe-threshold="5" 
          @change="onTabChange"
+         ref="orderIndexTabs"
         >
             <van-tab v-for="tab in tabs" :key="tab.name" :name="tab.name" :title="tab.title" >
                 <router-view/>

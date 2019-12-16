@@ -5,7 +5,8 @@
                 <van-image
                 width="100%" 
                 height="100%" 
-                src="http://img.super-s.club/00ab16c552fd40b3bab6aae101209581-img_100"
+                lazy-load
+                :src="imgUrl"
                 />
                 <span class="title">{{item.xh}}</span> 
             </van-col>
@@ -53,6 +54,9 @@
         computed:{
             weight(){
                 return this.item.zl>1000?(this.item.zl*0.001).toFixed(2):this.item.zl
+            },
+            imgUrl(){
+                return this.item.img + "-img_100"
             }
         }
     }
@@ -78,9 +82,9 @@
         .van-cell{
             padding: 0 0;
         } 
-        .red{
-            // color: red;
-        }
+        // .red{
+        //     // color: red;
+        // }
         .item-desc-info{
             font-size: 10px;
             font-weight: 100;
@@ -90,5 +94,7 @@
     .danwei{
         font-weight: bold;
     }
+
+
 }
 </style>
