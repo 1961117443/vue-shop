@@ -53,8 +53,11 @@
             onChange(index){
                 this.current = index;
             },
-            onClick(){ 
-                this.$router.push('/order/detail/'+this.order.code)
+            onClick(){
+                this.$router.push(
+                    {path:'/order/detail/'+this.order.code,
+                query:{order:this.order}
+                })
             }
         },
         computed:{

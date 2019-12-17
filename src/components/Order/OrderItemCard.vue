@@ -7,6 +7,7 @@
                 height="100%" 
                 lazy-load
                 :src="imgUrl"
+                class="item-img"
                 />
                 <span class="title">{{item.xh}}</span> 
             </van-col>
@@ -70,18 +71,21 @@
     .van-row{
         height: 100%;
     }
+    .item-img{
+        // margin-top: 20px;
+    }
     .title{
         font-weight: bold;
     }
     .item-desc{
         padding:0 5px;
-        overflow:hidden;
-        overflow-y: scroll;
+        // overflow:hidden;
+        // overflow-y: scroll;
         text-align: left;
         justify-content: center;
-        .van-cell{
-            padding: 0 0;
-        } 
+        // .van-cell{
+        //     padding: 0 0;
+        // } 
         // .red{
         //     // color: red;
         // }
