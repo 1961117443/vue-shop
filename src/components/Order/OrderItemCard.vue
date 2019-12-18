@@ -11,8 +11,8 @@
                 />
                 <span class="title">{{item.xh}}</span> 
             </van-col>
-            <van-col span="16" class="van-hairline--left">
-                <div class="item-desc van-ellipsis">
+            <van-col span="16" class="van-hairline--left"> 
+                    <div class="item-desc van-ellipsis">
                     <van-row>
                         <span class="item-desc-info">{{item.bm}}</span>
                         </van-row>
@@ -29,23 +29,22 @@
                         <van-col span="12"><span class="item-desc-info"><span class="red">{{item.sl}}</span><span class="danwei">支</span></span></van-col>
                         <van-col><span class="red">{{weight}}</span><span class="danwei">{{ item.zl>1000?'吨':'kg'}}</span></van-col>
                     </van-row>
-                </div>
+                </div> 
+                
             </van-col> 
+        </van-row>
+        <van-row>
+            <slot  name="desc-ex"></slot>
+        </van-row>
+        <van-row>
+            <slot  name="footer"></slot>
         </van-row>
     </div>
 </template>
 
 <script>
-    import { Cell, CellGroup,Row, Col ,Image   } from 'vant'
     export default {
         name:'OrderItemCard',
-        components:{ 
-            [Row.name]:Row,
-            [Col.name]:Col,
-            [Image.name]:Image,
-            [Cell.name]:Cell,
-            [CellGroup.name]:CellGroup
-        },
         props:['item'],
         data(){
             return{
@@ -71,9 +70,9 @@
     .van-row{
         height: 100%;
     }
-    .item-img{
-        // margin-top: 20px;
-    }
+    // .item-img{
+    //     // margin-top: 20px;
+    // }
     .title{
         font-weight: bold;
     }

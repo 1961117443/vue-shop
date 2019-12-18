@@ -13,33 +13,38 @@
               <h2 class="order-state-info-desc">交易关闭</h2>
               <h3 class="order-state-info-desc">超时关闭</h3>
             <!-- </van-sticky> -->
-            <van-image
+            <!-- <van-image
             width="100%"
             height="100%"
             src="https://img.yzcdn.cn/vant/cat.jpeg"
-            />
+            /> -->
         </div>
         <!-- 订单明细展示 --> 
         <!-- <van-divider content-position="left">订单明细</van-divider> --> 
         <div class="order-detail-info">
-            <el-card>
-                <div slot="header" class="clearfix">
+            <el-card shadow="never">
+                <div slot="header" class="clearfix header-info">
                     <span>订单明细</span>
-                    <!-- <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button> -->
+                     <van-button style="float: right; padding: 3px 0" size="mini" round>删除</van-button>
+                    <!-- <el-button style="float: right; padding: 3px 0" type="text">删除</el-button> -->
                 </div>
                 <div v-for="(item,index) in order.detail" :key="index" class="text item">
-                    <order-item-card :item="item"></order-item-card>  
-                    <div class="order-detail-info-actions">
-                        <van-button size="mini" round>改价</van-button>
-                        <van-button size="small" round>加购</van-button>
-                    </div>    
+                    <order-item-card :item="item">
+                        <!-- <div slot="desc" class="order-detail-info-desc">
+                            这里是额外描述区域
+                        </div> -->
+                        <div slot="footer" class="order-detail-info-actions">
+                            <van-button size="mini" round>改价</van-button>
+                            <van-button size="mini" round>加购</van-button>
+                        </div>
+                    </order-item-card>
                 </div>
             </el-card>            
         </div>
         
         <!-- 订单主表信息展示 -->
         <!-- <van-divider content-position="left">订单信息</van-divider> -->
-        <el-card  class="order-main-info">
+        <el-card  class="order-main-info" shadow="never">
             <p class="text item">订单编号: 107869928209</p> 
             <p class="text item">下单时间: 2019-12-13 16:00:55</p>   
             <p class="text item">支付方式: 在线支付</p>  
@@ -60,20 +65,10 @@
 </template>
 
 <script>
-import {  NavBar,Button,Sticky,GoodsAction,Panel ,Divider,Image   } from 'vant';
 import OrderItemCard from '@/components/Order/OrderItemCard.vue';
-import { Card } from 'element-ui'
     export default {
-        components:{ 
-            [NavBar.name]:NavBar,
-            [Button.name]:Button,
-            [Panel.name]:Panel,
-            [Divider.name]:Divider,
-            [Sticky.name]:Sticky,
-            [Image.name]:Image,
-            [GoodsAction.name]:GoodsAction,
-            [OrderItemCard.name]:OrderItemCard,
-            [Card.name]:Card
+        components:{  
+            [OrderItemCard.name]:OrderItemCard 
         }, 
         data(){
             return{
@@ -98,15 +93,26 @@ import { Card } from 'element-ui'
 
     .order-state-info{
         margin-top: 46px;
-        display: flex;
+        // display: flex;
         height: 100px;
-        justify-content: space-around;
+        // justify-content: space-around;
         .order-state-info-desc{
             padding-left: 50px;
-            color: red;
+            padding-top: 2px;
+            color:bisque;
         }
+        background-image: url("https://img.yzcdn.cn/vant/cat.jpeg")
     }
     .order-detail-info{
+        .el-card{
+            .el-card__header{
+                        text-align: center;
+                        padding: 8px 0;
+                        font-weight: bolder;
+                        background-color: aliceblue;
+                    }
+        }
+        
         font-size: 16px;
         .text {
             font-size: 14px;
@@ -123,44 +129,33 @@ import { Card } from 'element-ui'
         }
         .clearfix:after {
             clear: both
+        } 
+       .header-info {
+            // text-align: center;
+            padding: 8px 0;
+            font-weight: bolder;
+            background-color: aliceblue;
         }
-
-        // .box-card {
-        //     width: 480px;
-        // }
-        // width: 480px;
         .order-detail-info-actions{
             .van-button{
                 float: right;
-            margin: 5px 0;
-            }
-            
+                margin: 0 3px;
+            } 
+        }
+
+        .order-detail-info-desc{
+            text-align: left;
         }
     }
     .order-main-info{
-        margin-bottom: 46px;
-        .box-card{
-            // .text {
-            //     font-size: 14px;
-            // }
-
-            // .item {
-            //     padding: 18px 0;
-            // }
-
-            // .box-card {
-            //     width: 480px;
-            // }
-        }
+        // position: relative;
+        // z-index: 10;
+        // .el-card{
+        //     margin-bottom: 46px;
+        // }
     }
-    .order-actions{
-        // padding: 3px;
-        // position: absolute;
-        // left: 0;
-        // bottom: 0;
-        // width: 100%;
-        // height: 50px;
-        // background: aqua;
+    .order-actions{ 
+        margin-bottom: 50px;
         .van-button {
             margin: 8px 5px;
         }
@@ -171,7 +166,10 @@ import { Card } from 'element-ui'
     }
 
     .el-card{
-        margin-top:16px;
+        margin:8px 8px 0 8px;
+        .el-card__body{
+            padding: 8px;
+        }
     }
 } 
 

@@ -8,8 +8,7 @@ Vue.config.productionTip = false
 
 import { Lazyload } from 'vant';
 import './plugins/element.js'
-// options 为可选参数，无则不传
-Vue.use(Lazyload);
+import './plugins/vant.js'
 
 new Vue({
   router,
