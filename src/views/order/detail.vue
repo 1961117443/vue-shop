@@ -20,32 +20,32 @@
             />
         </div>
         <!-- 订单明细展示 --> 
-        <!-- <van-divider content-position="left">订单明细</van-divider> -->
-        <h4>订单明细</h4>
-        <div class="order-detail-info"> 
-            <van-panel v-for="(item,index) in order.detail" :key="index">
-            <div slot="header"/>
-            <div class="round">
-                <order-item-card :item="item"></order-item-card>         
-            </div>
-            </van-panel>
-            
+        <!-- <van-divider content-position="left">订单明细</van-divider> --> 
+        <div class="order-detail-info">
+            <el-card>
+                <div slot="header" class="clearfix">
+                    <span>订单明细</span>
+                    <!-- <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button> -->
+                </div>
+                <div v-for="(item,index) in order.detail" :key="index" class="text item">
+                    <order-item-card :item="item"></order-item-card>  
+                    <div class="order-detail-info-actions">
+                        <van-button size="mini" round>改价</van-button>
+                        <van-button size="small" round>加购</van-button>
+                    </div>    
+                </div>
+            </el-card>            
         </div>
+        
         <!-- 订单主表信息展示 -->
         <!-- <van-divider content-position="left">订单信息</van-divider> -->
-        <div class="order-main-info">
-            <van-panel>
-            <div slot="header"> 
-            </div>
-            <div class="round">
-                <p>订单编号: 107869928209</p> 
-                <p>下单时间: 2019-12-13 16:00:55</p>   
-                <p>支付方式: 在线支付</p>  
-                <p>支付时间: 2019-12-13 16:01:55</p>   
-                <p>配送方式: 京东快递</p>           
-            </div>
-            </van-panel>
-        </div>
+        <el-card  class="order-main-info">
+            <p class="text item">订单编号: 107869928209</p> 
+            <p class="text item">下单时间: 2019-12-13 16:00:55</p>   
+            <p class="text item">支付方式: 在线支付</p>  
+            <p class="text item">支付时间: 2019-12-13 16:01:55</p>   
+            <p class="text item">配送方式: 京东快递</p> 
+        </el-card>
         <!-- 订单操作按钮区域 -->
         
         <div class="order-actions">
@@ -62,6 +62,7 @@
 <script>
 import {  NavBar,Button,Sticky,GoodsAction,Panel ,Divider,Image   } from 'vant';
 import OrderItemCard from '@/components/Order/OrderItemCard.vue';
+import { Card } from 'element-ui'
     export default {
         components:{ 
             [NavBar.name]:NavBar,
@@ -71,7 +72,8 @@ import OrderItemCard from '@/components/Order/OrderItemCard.vue';
             [Sticky.name]:Sticky,
             [Image.name]:Image,
             [GoodsAction.name]:GoodsAction,
-            [OrderItemCard.name]:OrderItemCard
+            [OrderItemCard.name]:OrderItemCard,
+            [Card.name]:Card
         }, 
         data(){
             return{
@@ -92,6 +94,8 @@ import OrderItemCard from '@/components/Order/OrderItemCard.vue';
 .order-detail{
     font-size: 12px;
     overflow: hidden;
+
+
     .order-state-info{
         margin-top: 46px;
         display: flex;
@@ -103,10 +107,51 @@ import OrderItemCard from '@/components/Order/OrderItemCard.vue';
         }
     }
     .order-detail-info{
+        font-size: 16px;
+        .text {
+            font-size: 14px;
+        }
 
+        .item {
+            margin-bottom: 18px;
+        }
+
+        .clearfix:before,
+        .clearfix:after {
+            display: table;
+            content: "";
+        }
+        .clearfix:after {
+            clear: both
+        }
+
+        // .box-card {
+        //     width: 480px;
+        // }
+        // width: 480px;
+        .order-detail-info-actions{
+            .van-button{
+                float: right;
+            margin: 5px 0;
+            }
+            
+        }
     }
     .order-main-info{
         margin-bottom: 46px;
+        .box-card{
+            // .text {
+            //     font-size: 14px;
+            // }
+
+            // .item {
+            //     padding: 18px 0;
+            // }
+
+            // .box-card {
+            //     width: 480px;
+            // }
+        }
     }
     .order-actions{
         // padding: 3px;
@@ -123,6 +168,10 @@ import OrderItemCard from '@/components/Order/OrderItemCard.vue';
 
     .round{
         border-radius: 5px;
+    }
+
+    .el-card{
+        margin-top:16px;
     }
 } 
 
