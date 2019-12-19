@@ -15,16 +15,10 @@
 </template>
 
 <script>
-import OrderCard from '@/components/Order/OrderCard.vue'
-    import { List, Field,Cell,CellGroup,PullRefresh } from 'vant'
+import OrderCard from '@/components/Order/OrderCard.vue' 
     export default {
-        components:{
-            [Field.name]:Field,
-             [Cell.name]:Cell,
-             [CellGroup.name]:CellGroup,
-             [OrderCard.name]:OrderCard,
-             [List.name]:List,
-             [PullRefresh.name]:PullRefresh
+        components:{ 
+             [OrderCard.name]:OrderCard 
         },
         props:['kind'],
         data(){
@@ -39,13 +33,9 @@ import OrderCard from '@/components/Order/OrderCard.vue'
                 id:this.$route.params.id
             }
         },
-        mounted(){
-            // console.log('order-list-mounted')
-            // console.log(this.$route.params.id)
+        mounted(){ 
         },
-        created(){
-            // console.log(this.$route.params.id)
-            // console.log('order-list-created')
+        created(){ 
         },
         methods:{
             onRefresh() {

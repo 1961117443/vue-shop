@@ -23,14 +23,10 @@
     </div>
 </template>
 
-<script>
-    import { Tab, Tabs,NavBar  } from 'vant';
+<script> 
     import OrderList from '@/components/Order/OrderList.vue'
     export default {
         components:{
-            [Tab.name]:Tab,
-            [Tabs.name]:Tabs,
-            [NavBar.name]:NavBar,
             [OrderList.name]:OrderList
         },
         data() {

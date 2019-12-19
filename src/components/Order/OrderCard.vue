@@ -1,7 +1,10 @@
 <template>
     <div class="order-card-container">
-        <van-panel :title="order.code" @click="onClick">
-            <van-row class="van-cell info">
+        <van-panel :title="order.code">
+            <!-- <div slot="header">
+                <router-link :to="{path:'/order/detail/'+this.order.code}">{{order.code}}</router-link>
+            </div> -->
+            <van-row class="van-cell info"  @click="onClick">
                 <van-col span="18">
                     <van-swipe @change="onChange"> 
                         <van-swipe-item v-for="(item,index) in order.detail" :key="index">
@@ -27,19 +30,11 @@
     </div>
 </template>
 
-<script>
-   import { Row, Col ,Panel,Button,Swipe, SwipeItem ,Circle  } from 'vant'
+<script> 
    import OrderItemCard from '@/components/Order/OrderItemCard.vue';
     export default {
         name:'OrderCard',
-        components:{
-            [Panel.name]:Panel,
-            [Button.name]:Button,
-            [Row.name]:Row,
-            [Col.name]:Col,
-            [Swipe.name]:Swipe,
-            [SwipeItem.name]:SwipeItem,
-            [Circle.name]:Circle,
+        components:{ 
             [OrderItemCard.name]:OrderItemCard
         },
         props:['order'],
@@ -54,10 +49,7 @@
                 this.current = index;
             },
             onClick(){
-                this.$router.push(
-                    {path:'/order/detail/'+this.order.code,
-                query:{order:this.order}
-                })
+                this.$router.push({path:'/order/detail/'+this.order.code})
             }
         },
         computed:{
@@ -77,7 +69,7 @@
         
         .info{
             font-size: 12px;
-            height: 160px;
+            // height: 160px;
             border: 1px;
             border-color: red;
             padding: 0 0; 
