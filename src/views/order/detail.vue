@@ -24,8 +24,8 @@
                 <div v-for="(item,index) in order.detail" :key="index" class="text item">
                     <order-item-card :item="item"> 
                         <div slot="price" slot-scope="scope"> 
-                            <p class="red title"><span>单价:￥{{scope.scope.dj}}</span></p>
-                            <p class="red title"><span>金额:￥{{scope.scope.je}}</span></p>
+                            <p class="red title"><span>单价:￥{{scope.data.dj}}</span></p>
+                            <p class="red title"><span>金额:￥{{scope.data.je}}</span></p>
                         </div>
                         <div slot="footer" class="order-detail-info-actions" slot-scope="scope">
                             <van-button size="mini" round @click="onClickGaijia(scope.data)">改价</van-button>
@@ -58,7 +58,13 @@
                 <van-button size="small" round>付款</van-button>
             </van-goods-action>
         </div>
-          
+
+         <van-number-keyboard 
+         v-model="danjia"
+            :show="show"
+            :maxlength="6"
+            @blur="show = false"
+            />
     </div>
 </template>
 
@@ -71,7 +77,9 @@ import OrderItemCard from '@/components/Order/OrderItemCard.vue';
         data(){
             return{
                  id:this.$route.params.id ,
-                 order:{}
+                 order:{},
+                 show:false,
+                 danjia:""
             }
         },
         created(){
@@ -83,8 +91,9 @@ import OrderItemCard from '@/components/Order/OrderItemCard.vue';
                     this.order=res
                 })
             },
-            onClickGaijia(data){
-                data.dj = 1000
+            onClickGaijia(data){ 
+                this.danjia = ""+ data.dj
+                this.show = true
                 console.log(data)
             }
         }

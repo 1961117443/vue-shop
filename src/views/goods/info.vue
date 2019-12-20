@@ -50,33 +50,10 @@
   </div>
 </template>
 
-<script>
-import {
-  Tag,
-  Col,
-  Icon,
-  Cell,
-  CellGroup,
-  Swipe,
-  Toast,
-  SwipeItem,
-  GoodsAction,
-  GoodsActionIcon,
-  GoodsActionButton
-} from 'vant';
+<script> 
 import GoodsSku from '@/components/goods/GoodsSku.vue'
 export default {
   components: {
-    [Tag.name]: Tag,
-    [Col.name]: Col,
-    [Icon.name]: Icon,
-    [Cell.name]: Cell,
-    [CellGroup.name]: CellGroup,
-    [Swipe.name]: Swipe,
-    [SwipeItem.name]: SwipeItem,
-    [GoodsAction.name]: GoodsAction,
-    [GoodsActionIcon.name]: GoodsActionIcon,
-    [GoodsActionButton.name]: GoodsActionButton, 
     [GoodsSku.name]: GoodsSku, 
   },
 

@@ -9,6 +9,7 @@
     <van-cell-group class="cell-test-group">
       <van-sticky>
         <van-cell title="商品详情页面" is-link to="/goods/info" />
+        <van-cell title="商品列表页面" is-link to="/goods/list" />
       </van-sticky>
       
       <van-cell title="测试数据绑定"  @click="testBindClick" :value="order.k1_text"/>

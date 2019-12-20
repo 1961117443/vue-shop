@@ -16,7 +16,7 @@
         />
       </van-checkbox>
     </van-checkbox-group>
-    <van-submit-bar
+    <van-submit-bar style="bottom: 50px;"
       :price="totalPrice"
       :disabled="!checkedGoods.length"
       :button-text="submitBarText"
@@ -39,7 +39,8 @@ export default {
   data() {
     return {
       checkedGoods: ['1', '2', '3'],
-      goods: [{
+      goods: [
+        {
         id: '1',
         title: '进口香蕉',
         desc: '约250g，2根',
@@ -139,6 +140,7 @@ export default {
 <style lang="less" scoped>
 .card-goods {
   padding: 10px 0;
+  margin-bottom: 100px;
   background-color: #fff; 
   &__item {
     position: relative;
@@ -163,8 +165,8 @@ export default {
       color: #f44;
     } 
   }
-  .van-submit-bar{
-      bottom: 50px;
-    }
+  //  .van-action-bar{
+  //     bottom: 50px; 
+  //   }
 }
 </style>

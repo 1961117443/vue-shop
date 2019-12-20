@@ -104,7 +104,7 @@
             right: 5px;
             bottom: 5px;
             padding: 2px 5px;
-            color: #fff;
+            color:red;
             font-size: 12px;
             background: rgba(0, 0, 0, 0.1);
         }

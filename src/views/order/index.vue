@@ -3,13 +3,12 @@
         <van-nav-bar
         title="我的订单"
         left-text="返回"
-        left-arrow
+        left-arrow 
         @click-left="onClickLeft"
         />
         <van-tabs 
         swipeable
-        sticky 
-        :replace="true"
+        sticky   
         v-model="activeName" 
         :swipe-threshold="5" 
          @change="onTabChange"

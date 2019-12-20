@@ -33,7 +33,7 @@
               <span>;</span>
             </p>
             <div style="padding:5px 0 ;"> 
-                <slot name="price" :scope="data">
+                <slot name="price" :data="item">
                     <!-- <p class="red title"><span>单价:￥12345</span></p>
                     <p class="red title"><span>金额:￥12345</span></p> -->
                 </slot>
