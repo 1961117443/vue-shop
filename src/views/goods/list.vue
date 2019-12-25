@@ -3,20 +3,33 @@
         <van-nav-bar title="型材型号" left-arrow> 
             <van-icon name="search" slot="right" />
         </van-nav-bar>
-
-        <van-row >
-            <van-col :span="12" v-for="(o, index) in 11" :key="index" >
-                <el-card :body-style="{ padding: '0px' }">
-                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-                <div style="padding: 14px;">
-                    <span>LX9017B-1.1</span>
-                    <!-- <div class="bottom clearfix">
-                    <span class="red" style="font-size:10px;">￥</span><span class="red" style="font-size:13px;">12345</span>
-                    </div> -->
-                </div>
-                </el-card>
-            </van-col>
-        </van-row>
+        <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+            <van-row  >
+                <van-list
+               
+                v-model="loading"
+                :finished="finished"
+                :immediate-check="false"
+                finished-text="没有更多了"
+                @load="onLoad"
+                >
+                    <van-col :span="12" v-for="item in goodsList" :key="item.uuid" class="clearfix">
+                        <el-card :body-style="{ padding: '0px' }"> 
+                        <van-image lazy-load height="100" :src="item.img_url"/>
+                        <div style="padding: 14px;">
+                            <span>{{ item.title }}</span>
+                            <div class="bottom clearfix van-multi-ellipsis--l2">
+                                <time class="time">{{ item.desc }}</time>
+                                <!-- <span class="red" style="font-size:10px;">￥</span> -->
+                            <!-- <span class="red" style="font-size:10px;">￥</span><span class="red" style="font-size:13px;">12345</span> -->
+                            </div>
+                        </div>
+                        </el-card>
+                    </van-col>
+                </van-list>
+            </van-row>
+        </van-pull-refresh>
+        
     </div>
 </template>
 
@@ -24,8 +37,76 @@
     export default {
         data() {
             return {
-            currentDate: new Date()
+                pageIndex: 1,
+                goodsList:[],
+                isLoading:false,
+                loading:false,
+                finished:false
+
             };
+        },
+        mounted(){
+             this.getGoodsList()
+           // console.log(this.getGoodsList())
+        },
+        methods:{
+            getGoodsList(){
+               this.$http.get('api/goods',{pageIndex: this.pageIndex,pageSize:10})
+                .then(res=>{
+                    if (res.length>0) {
+                         this.goodsList=  this.goodsList.concat(res)
+                    }else{
+                        this.finished = true;
+                    }   
+                  
+                    // console.log(this.goodsList) 
+                })
+            },
+            onLoad(){ 
+
+                // this.pageIndex ++
+                // this.getGoodsList()
+                // .then(res=>{
+                    
+                //     console.log(res)
+                //     // if (res.length==0) {
+                //     //     this.finished = true;
+                //     // }
+                // })
+                // .finally(()=>{
+                //         this.loading = false;
+                // }) 
+               //异步更新数据
+                setTimeout(() => {
+                    this.pageIndex ++
+                    this.$http.get('api/goods',{pageIndex: this.pageIndex,pageSize:10})
+                    .then(res=>{
+                        if (res.length>0) {
+                            this.goodsList=  this.goodsList.concat(res)
+                        }else{
+                            this.finished = true;
+                        }    
+                    
+                        // console.log(this.goodsList) 
+                    })
+                    
+                    
+                    // 加载状态结束
+                    this.loading = false;
+
+                    // // 数据全部加载完成
+                    // if (this.goodsList.length >= 40) {
+                    //     this.finished = true;
+                    // }
+                }, 500);
+            },
+            onRefresh(){ 
+                this.pageIndex = 1
+                this.goodsList.splice(0,this.goodsList.length)
+                // this.getGoodsList()
+                this.isLoading = false;
+                
+            }
         }
     }
 </script>
@@ -36,10 +117,10 @@
 .time {
     font-size: 13px;
     color: #999;
-  }
+  } 
   
   .bottom {
-    margin-top: 13px;
+    margin-top: 10px;
     line-height: 12px;
   }
 
@@ -61,6 +142,11 @@
   
   .clearfix:after {
       clear: both
+  }
+
+   
+  .van-col{
+      padding: 1px;
   }
 }
 </style>
