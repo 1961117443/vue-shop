@@ -5,8 +5,8 @@ const resolve = function(dir) {
 }
 
 module.exports = {
-  publicPath:
-    process.env.NODE_ENV === 'production' ? '/vue-shop/' : '/',
+  publicPath:'./',
+  //publicPath: process.env.NODE_ENV === 'production' ? '/vue-shop/' : './',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: false, // 是否开启eslint保存检测

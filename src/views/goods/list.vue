@@ -3,8 +3,9 @@
         <van-nav-bar title="型材型号" left-arrow> 
             <van-icon name="search" slot="right" />
         </van-nav-bar>
-        <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
-            <van-row  >
+
+        <van-pull-refresh v-model="isLoading" @refresh="onRefresh"> 
+            <van-row  class="van-clearfix">
                 <van-list
                
                 v-model="loading"
@@ -13,7 +14,7 @@
                 finished-text="没有更多了"
                 @load="onLoad"
                 >
-                    <van-col :span="12" v-for="item in goodsList" :key="item.uuid" class="clearfix">
+                    <van-col :span="12" v-for="item in goodsList" :key="item.uuid">
                         <el-card :body-style="{ padding: '0px' }"> 
                         <van-image lazy-load height="100" :src="item.img_url"/>
                         <div style="padding: 14px;">
@@ -113,7 +114,14 @@
 
 <style lang="scss" scoped>
 .goods-list-container{
-    background-color: #eee;
+    background-color: #eee; 
+    .van-clearfix{
+        &::after {
+            display: table;
+            clear: both;
+            content: '';
+        }
+    }
 .time {
     font-size: 13px;
     color: #999;
