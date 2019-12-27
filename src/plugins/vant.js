@@ -26,15 +26,16 @@ import {
     Toast,
     GoodsActionIcon,
     GoodsActionButton,
-    Search
+    Search ,Tabbar,TabbarItem
 } from 'vant'
+Vue.use(Tabbar)
+Vue.use(TabbarItem)
 Vue.use(Tag)
 Vue.use(Icon)
 Vue.use(Toast)
 Vue.use(GoodsActionIcon)
 Vue.use(GoodsActionButton)
-Vue.use(Search)
-
+Vue.use(Search) 
 Vue.use(List)
 Vue.use(Field)
 Vue.use(PullRefresh)

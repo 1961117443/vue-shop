@@ -3,17 +3,17 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
  
-    <transition name="fade">
+    <!-- <transition name="fade">
         <router-view/>
-    </transition> 
+    </transition>  -->
 
     
-    <van-tabbar v-model="active">
+    <!-- <van-tabbar v-model="active">
       <van-tabbar-item icon="home-o" to="/index">首页</van-tabbar-item>
       <van-tabbar-item icon="search" to="/cateory">分类</van-tabbar-item>
       <van-tabbar-item icon="cart-o" to="/cart">购物车</van-tabbar-item>
       <van-tabbar-item icon="friends-o" to="/member">会员</van-tabbar-item>
-    </van-tabbar>
+    </van-tabbar> -->
   </div>
 </template>
 

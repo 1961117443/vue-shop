@@ -3,17 +3,21 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
-const VueRouterPush = VueRouter.prototype.push
-VueRouter.prototype.push = function push(to){
-  return VueRouterPush.call(this,to).catch(err=> console.log(err))
-}
+// const VueRouterPush = VueRouter.prototype.push
+// VueRouter.prototype.push = function push(to){
+//   return VueRouterPush.call(this,to).catch(err=> console.log(err))
+// }
 
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name:'_index',
     redirect: '/index',
-    component: Home,
+    component:() => import('../App.vue'),
+    meta:{
+      showNavbar:false,
+      showTabbar:true
+    },
     children: [
       {
         path: '/index',
@@ -36,6 +40,12 @@ const routes = [
         component: () => import('../views/user/index.vue')
       }
     ]
+  },
+  {
+    path: '/home',
+    name: 'home',
+    redirect: '/index',
+    component: Home 
   },
   {
     path: '/goods/info',
@@ -66,11 +76,52 @@ const routes = [
   }
 ]
 
+
+
+
 const router = new VueRouter({
   //mode: 'history',
   mode: 'hash',
   base: process.env.BASE_URL,
   routes
 }) 
+
+// 导航守卫
+router.beforeEach(async (to, from, next) => {
+  console.log(to)
+  next()
+  //document.title = getTitle(to.meta.title)
+  // if (to.path === '/login') {
+  //   next()
+  // } else {
+  //   if (store.getters.token) {
+  //     const hasRoles = store.getters.roles.length > 0
+  //     if (hasRoles) {
+  //       next()
+  //     } else {
+  //       try {
+  //         const { roles } = await store.dispatch('user/_getInfo')
+  //         const addRoutes = await store.dispatch(
+  //           'permission/getAsyncRoutes',
+  //           roles
+  //         )
+  //         router.addRoutes(addRoutes)
+
+  //         // hack method to ensure that addRoutes is complete
+  //         // set the replace: true, so the navigation will not leave a history record
+  //         next({ ...to, replace: true })
+  //       } catch (error) {
+  //         Message.error(error)
+  //       }
+  //     }
+  //   } else {
+  //     next({
+  //       path: '/login',
+  //       query: {
+  //         redirect: to.fullPath
+  //       }
+    //   })
+    // }
+  })
 
 export default router

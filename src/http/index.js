@@ -3,7 +3,7 @@ import Qs from 'qs'
 import store from '@/store'
 import router from '@/router'
 import Vue from 'vue'
-import { Toast } from 'vant';
+import { Toast,Notify } from 'vant'; 
 
 const $axios = axios.create({
   // 设置超时时间
@@ -62,17 +62,19 @@ $axios.interceptors.response.use(
           })
           break
         case 404:
-          Message.error('网络请求不存在')
+          Notify('网络请求不存在')
           break
         default:
-          Message.error(error.response.data.message)
+          Notify(error.response.data.message)
       }
     } else {
       // 请求超时或者网络有问题
       if (error.message.includes('timeout')) {
-        Message.error('请求超时！请检查网络是否正常')
+        Notify('请求超时！请检查网络是否正常') 
+        // Message.error('请求超时！请检查网络是否正常')
       } else {
-        Message.error('请求失败，请检查网络是否已连接')
+        Notify('请求失败，请检查网络是否已连接') 
+        // Message.error('请求失败，请检查网络是否已连接')
       }
     }
     return Promise.reject(error)

@@ -55,7 +55,7 @@ export default {
       this.$router.push({path:'/order',query:{tab:name}})
     },
     getInfoCount(){
-      this.$http.get('api/order/state/count').then(res=>{
+      this.$http.get('api/orders/state/count').then(res=>{
         this.stateCounts = res
       })
     }
