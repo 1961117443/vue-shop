@@ -1,15 +1,16 @@
 <template>
-  <div id="app">
-    <van-nav-bar v-if="$store.getters.showNavbar"
-      title="标题"
-      left-text="返回"
-      right-text="按钮"
+  <div id="app" class="app-container">
+    <van-nav-bar v-if="$store.getters.appBar.showNavbar"
+      :title="$store.getters.appBar.navBarTitle"
+      left-text="返回" 
       left-arrow
       @click-left="onClickLeft"
       @click-right="onClickRight"
     />
-    <router-view/>
-    <van-tabbar v-if="$store.getters.showTabbar" v-model="active">
+    <transition name="fade">
+      <router-view/>
+    </transition>
+    <van-tabbar v-if="$store.getters.appBar.showTabbar" v-model="active">
       <van-tabbar-item replace icon="home-o" to="/index">首页</van-tabbar-item>
       <van-tabbar-item replace icon="search" to="/cateory">分类</van-tabbar-item>
       <van-tabbar-item replace icon="cart-o" to="/cart">购物车</van-tabbar-item>
@@ -19,6 +20,7 @@
 </template>
 
 <script>
+import { watch } from 'fs'
 export default { 
   data(){
     return{
@@ -27,21 +29,41 @@ export default {
   },
   methods:{
     onClickLeft(){
-
+       this.$router.go(-1)
     },
     onClickRight(){
 
     }
+  },
+  watch:{
+    'router.path':function(n,o){
+      console.log(n)
+    }
   }
 }
 </script>
-<style>
+<style lang="scss">
+.app-container{
+  overflow: hidden; 
+  .fade-enter {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    .fade-leave-to {
+      opacity: 0;
+      transform: translateX(-100%);
+      position: absolute;
+    }
+    .fade-enter-active,.fade-leave-active {
+      transition: all 0.3s ease;
+    }
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
-  color: #2c3e50; 
+  color: #2c3e50;  
 }
 
 #nav {

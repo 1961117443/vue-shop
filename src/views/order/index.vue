@@ -1,11 +1,11 @@
 <template>
     <div class="order-container">
-        <van-nav-bar
+        <!-- <van-nav-bar
         title="我的订单"
         left-text="返回"
         left-arrow 
         @click-left="onClickLeft"
-        />
+        /> -->
         <van-tabs 
         swipeable
         sticky   

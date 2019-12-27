@@ -80,6 +80,7 @@ export default {
 
     onClickCart() {
       this.$router.push('/cart');
+      // this.$store.dispatch('app/_setBarState',{showNavbar:false,showTabbar:false,title:"购物车"})  
     },
     sorry() { 
         this.show = true

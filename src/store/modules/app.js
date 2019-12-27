@@ -2,8 +2,11 @@
 set sidebar open or close,and some app setting
  */
 const state = {
-    showHeaderNavBar:false,
-    showBottomTabBar:true,
+    barState:{
+      showNavbar:false,
+      showTabbar:true,
+      navBarTitle:"",
+    },     
     opened: sessionStorage.getItem('open')
       ? sessionStorage.getItem('open')
       : 'false',
@@ -24,14 +27,16 @@ const state = {
       state.showDriver = payload
       localStorage.setItem('driver', payload)
     },
-    SET_HEADER_NAVBAR(state,data){
-        state.showHeaderNavBar = data
+    SET_BARSTATE(state, data){
+      state.barState.showNavbar = data.showNavbar
+      state.barState.showTabbar = data.showTabbar
+      state.barState.navBarTitle = data.title 
     }
   }
   const actions = {
-      _showNavBar({ commit },data){
-          commit('SET_HEADER_NAVBAR',data)
-      }
+    _setBarState({ commit }, meta){
+      commit('SET_BARSTATE',meta)
+    }
   }
   export default {
     namespaced: true,

@@ -12,8 +12,9 @@ const getters = {
     //     return true
     //   }
     // },
-    showNavbar: state=>state.app.showHeaderNavBar,
-    showTabbar: state=>state.app.showBottomTabBar,
+    appBar: state=> state.app.barState,
+    // showNavbar: state=>state.app.showHeaderNavBar, 
+    // title: state => state.app.navBarTitle,
     // msgIsShow: state => state.app.msgIsShow,
     // showDriver: state => state.app.showDriver,
     // shopCarAllCount: state => {

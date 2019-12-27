@@ -1,8 +1,8 @@
 <template>
     <div class="goods-list-container">
-        <van-nav-bar title="型材型号" left-arrow> 
+        <!-- <van-nav-bar title="型材型号" left-arrow> 
             <van-icon name="search" slot="right" />
-        </van-nav-bar>
+        </van-nav-bar> -->
 
         <van-pull-refresh v-model="isLoading" @refresh="onRefresh"> 
             <van-row  class="van-clearfix">
@@ -14,11 +14,11 @@
                 finished-text="没有更多了"
                 @load="onLoad"
                 >
-                    <van-col :span="12" v-for="item in goodsList" :key="item.uuid">
-                        <el-card :body-style="{ padding: '0px' }"> 
+                    <van-col :span="12" v-for="item in goodsList" :key="item.uuid" @click="onClick(item.uuid)">
+                        <el-card :body-style="{ padding: '0px' }" > 
                         <van-image lazy-load height="100" :src="item.img_url"/>
                         <div style="padding: 14px;">
-                            <span>{{ item.title }}</span>
+                            <span class="title">{{ item.title }}</span>
                             <div class="bottom clearfix van-multi-ellipsis--l2">
                                 <time class="time">{{ item.desc }}</time>
                                 <!-- <span class="red" style="font-size:10px;">￥</span> -->
@@ -107,6 +107,9 @@
                 // this.getGoodsList()
                 this.isLoading = false;
                 
+            },
+            onClick(data){
+                this.$router.push({path:'/goods/info',query:{id:data}})
             }
         }
     }
