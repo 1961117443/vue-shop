@@ -1,16 +1,17 @@
 <template>
   <div id="app" class="app-container">
-    <van-nav-bar v-if="$store.getters.appBar.showNavbar"
+    <van-nav-bar v-show="$store.getters.appBar.showNavbar"
       :title="$store.getters.appBar.navBarTitle"
       left-text="返回" 
       left-arrow
       @click-left="onClickLeft"
       @click-right="onClickRight"
     />
-    <transition name="fade">
+     <router-view/>
+    <!-- <transition name="fade">
       <router-view/>
-    </transition>
-    <van-tabbar v-if="$store.getters.appBar.showTabbar" v-model="active">
+    </transition> -->
+    <van-tabbar v-show="$store.getters.appBar.showTabbar" v-model="active">
       <van-tabbar-item replace icon="home-o" to="/index">首页</van-tabbar-item>
       <van-tabbar-item replace icon="search" to="/cateory">分类</van-tabbar-item>
       <van-tabbar-item replace icon="cart-o" to="/cart">购物车</van-tabbar-item>

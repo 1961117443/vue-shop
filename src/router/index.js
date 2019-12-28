@@ -22,7 +22,7 @@ const getTitle = function(data){
 }
 // 导航守卫
 router.beforeEach(async (to, from, next) => { 
-  let meta = Object.assign({showNavbar:false,showTabbar:true,title:"vue-app"},to.meta)
+  let meta = Object.assign({showNavbar:false,showTabbar:false,title:"vue-app"},to.meta)
   document.title = meta.title
   store.dispatch('app/_setBarState',meta)  
   next()

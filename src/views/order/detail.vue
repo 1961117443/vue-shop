@@ -59,27 +59,55 @@
             </van-goods-action>
         </div>
 
-         <van-number-keyboard 
-         v-model="danjia"
-            :show="show"
-            :maxlength="6"
-            @blur="show = false"
+        <van-popup
+        v-model="show" 
+        position="bottom"
+        :style="{ height: '75%' }"
+        >
+            <order-item-edit :item="item"></order-item-edit>
+        </van-popup>
+        <!-- <van-dialog
+        v-model="show" 
+        title="修改单价"
+        show-cancel-button
+        >
+        <div style="height:250px;" >
+            <van-field
+            readonly
+            clickable
+            :value="danjia"
+            @touchstart.native.stop="show = true"
             />
+
+            <van-number-keyboard
+            v-model="danjia"
+            :show="show"
+            theme="custom"
+            extra-key="."
+            close-button-text="完成"
+            @close="onClose"
+            />
+        </div>
+        </van-dialog>  -->
     </div>
 </template>
 
 <script>
 import OrderItemCard from '@/components/Order/OrderItemCard.vue';
+import OrderItemEdit from '@/components/Order/OrderItemEdit.vue';
     export default {
         components:{  
-            [OrderItemCard.name]:OrderItemCard 
+            [OrderItemCard.name]:OrderItemCard,
+            [OrderItemEdit.name]:OrderItemEdit 
         }, 
         data(){
             return{
                  id:this.$route.params.id ,
                  order:{},
                  show:false,
-                 danjia:""
+                 danjia:"",
+                 show2:false,
+                 item:{}
             }
         },
         created(){
@@ -87,14 +115,19 @@ import OrderItemCard from '@/components/Order/OrderItemCard.vue';
         },
         methods:{
             getOrder(){
-                this.$http.get('api/order/get?id='+this.id).then(res=>{
+                this.$http.get('api/orders/'+this.id).then(res=>{
                     this.order=res
                 })
             },
             onClickGaijia(data){ 
                 this.danjia = ""+ data.dj
                 this.show = true
+                this.item = data
                 console.log(data)
+            },
+            onClose(){
+                this.show = false
+                this.order.dj =this.danjia
             }
         }
     }

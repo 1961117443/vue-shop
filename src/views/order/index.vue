@@ -15,7 +15,7 @@
          ref="orderIndexTabs"
         >
             <van-tab v-for="tab in tabs" :key="tab.name" :name="tab.name" :title="tab.title" >
-                <router-view/>
+               <router-view/>
             </van-tab>
         </van-tabs>
         
@@ -23,10 +23,10 @@
 </template>
 
 <script> 
-    import OrderList from '@/components/Order/OrderList.vue'
+    // import OrderList from '@/components/Order/OrderList.vue'
     export default {
         components:{
-            [OrderList.name]:OrderList
+            // [OrderList.name]:OrderList
         },
         data() {
             return {
@@ -60,7 +60,7 @@
                 this.$router.go(-1)
             },
             onTabChange(name){ 
-               this.$router.replace('/order/list/'+name)
+              this.$router.replace('/order/list/'+name)
                 
             }
         }

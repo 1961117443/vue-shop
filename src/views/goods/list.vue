@@ -7,7 +7,6 @@
         <van-pull-refresh v-model="isLoading" @refresh="onRefresh"> 
             <van-row  class="van-clearfix">
                 <van-list
-               
                 v-model="loading"
                 :finished="finished"
                 :immediate-check="false"

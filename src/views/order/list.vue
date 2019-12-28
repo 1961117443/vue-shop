@@ -47,7 +47,7 @@ import OrderCard from '@/components/Order/OrderCard.vue'
             },
             onLoad() {  
                 //获取订单数据
-                this.$http.get('api/orders/get?type='+this.id,{pageIndex:this.pageIndex,pageSize:5}).then(res=>{
+                this.$http.get('api/orders?type='+this.id,{pageIndex:this.pageIndex,pageSize:5}).then(res=>{
                     //加载状态结束
                     this.loading = false
                     //数据全部加载完成

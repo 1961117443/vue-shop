@@ -11,7 +11,8 @@ const routes = [
           path: '/index',
           name: 'index',
           meta:{
-            showNavbar:false 
+            showNavbar:false,
+            showTabbar:true 
           },
           component: () => import('../views/home/index.vue')
         },
@@ -19,7 +20,8 @@ const routes = [
           path: '/cateory',
           name: 'cateory',
           meta:{
-            showNavbar:false 
+            showNavbar:false,
+            showTabbar:true  
           },
           component: () => import('../views/goods/index.vue')
         },
@@ -27,7 +29,8 @@ const routes = [
           path: '/cart',
           name: 'cart',
           meta:{
-            showNavbar:false 
+            showNavbar:false ,
+            showTabbar:true 
           },
           component: () => import('../views/cart/index.vue')
         },
@@ -35,7 +38,8 @@ const routes = [
           path: '/member',
           name: 'member',
           meta:{
-            showNavbar:false 
+            showNavbar:false ,
+            showTabbar:true 
           },
           component: () => import('../views/user/index.vue')
         }
@@ -64,6 +68,11 @@ const routes = [
     {
       path: '/order',
       name: 'order',
+      meta:{
+        showNavbar:true,
+        showTabbar:false,
+        title:"订单列表" 
+      },
       component: () => import('../views/order/index.vue') ,
       children:[
         {
