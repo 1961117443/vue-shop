@@ -30,9 +30,9 @@
                         <div slot="footer" class="order-detail-info-actions" slot-scope="scope">
                             <van-button size="mini" round @click="onClickGaijia(scope.data)">改价</van-button>
                             <!-- <van-button size="mini" round>加购</van-button> -->
-                        </div>
-                       
+                        </div>                       
                     </order-item-card>
+                    <div class="van-hairline--bottom"></div>
                 </div>
             </el-card>            
         </div>
@@ -56,39 +56,27 @@
                 <van-button size="small" round>关闭</van-button>
                 <van-button size="small" round>审价</van-button>
                 <van-button size="small" round>付款</van-button>
+                <van-button size="small" round @click="onClickPrice">批改价格</van-button>
             </van-goods-action>
         </div>
 
         <van-popup
         v-model="show" 
         position="bottom"
-        :style="{ height: '75%' }"
+        transition="van-slide-up"
+        :style="{ height: '68%' }"
         >
-            <order-item-edit :item="item"></order-item-edit>
+            <order-item-edit v-if="show" :item="item" :fields="fs" @success="onSuccess"></order-item-edit>
         </van-popup>
-        <!-- <van-dialog
-        v-model="show" 
-        title="修改单价"
-        show-cancel-button
-        >
-        <div style="height:250px;" >
-            <van-field
-            readonly
-            clickable
-            :value="danjia"
-            @touchstart.native.stop="show = true"
-            />
 
-            <van-number-keyboard
-            v-model="danjia"
-            :show="show"
-            theme="custom"
-            extra-key="."
-            close-button-text="完成"
-            @close="onClose"
-            />
-        </div>
-        </van-dialog>  -->
+        <van-popup
+        v-model="showBatch" 
+        position="bottom"
+        transition="van-slide-up"
+        :style="{ height: '20%' }"
+        >
+            <order-item-edit v-if="showBatch" :item="item2" :fields="fsBatch" @success="onSuccess2"></order-item-edit>
+        </van-popup>
     </div>
 </template>
 
@@ -106,8 +94,23 @@ import OrderItemEdit from '@/components/Order/OrderItemEdit.vue';
                  order:{},
                  show:false,
                  danjia:"",
-                 show2:false,
-                 item:{}
+                 showBatch:false,
+                 item:{},
+                 item2:{},
+                 fs:[
+                     {field:'bm',disabled:true,caption:'表面'},
+                     {field:'bz',disabled:true,caption:'包装'},
+                     {field:'cz',disabled:true,caption:'材质'},
+                     {field:'bh',disabled:true,caption:'壁厚'},
+                     {field:'cd',disabled:true,caption:'长度'},
+                     {field:'mz',disabled:true,caption:'米重'},
+                     {field:'sl',disabled:true,caption:'数量'},
+                     {field:'zl',disabled:true,caption:'重量'},
+                     {field:'dj',disabled:false,caption:'单价'}
+                 ],
+                 fsBatch:[ 
+                     {field:'dj',disabled:false,caption:'单价'}
+                 ]
             }
         },
         created(){
@@ -119,15 +122,29 @@ import OrderItemEdit from '@/components/Order/OrderItemEdit.vue';
                     this.order=res
                 })
             },
-            onClickGaijia(data){ 
-                this.danjia = ""+ data.dj
+            onClickGaijia(data){
                 this.show = true
-                this.item = data
-                console.log(data)
+                this.item =data// Object.assign({},data)
             },
             onClose(){
                 this.show = false
                 this.order.dj =this.danjia
+            },
+            onSuccess(data){
+                this.item = Object.assign(this.item,data)
+                this.item.je = (this.item.dj * this.item.zl).toFixed(2)
+                this.show=false 
+            },
+            onSuccess2(data){
+                this.order.detail.forEach(item=>{ 
+                    item = Object.assign(item,data)
+                    item.je = (item.dj * item.zl).toFixed(2)
+                })
+                console.log(data)
+                this.showBatch=false 
+            },
+            onClickPrice(){
+                this.showBatch=true 
             }
         }
     }
