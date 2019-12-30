@@ -15,7 +15,12 @@
          ref="orderIndexTabs"
         >
             <van-tab v-for="tab in tabs" :key="tab.name" :name="tab.name" :title="tab.title" >
-               <router-view/>
+               <!-- <router-view/> -->
+               <pull-refresh-list :url="'api/orders?type='+tab.name" :params="tab" >
+                    <template v-slot="{data}">  
+                        <order-card v-for="item in data" :key="item.uuid" :order="item"/>
+                    </template>
+               </pull-refresh-list>
             </van-tab>
         </van-tabs>
         
@@ -24,9 +29,12 @@
 
 <script> 
     // import OrderList from '@/components/Order/OrderList.vue'
+    import OrderCard from '@/components/Order/OrderCard.vue' 
+    import PullRefreshList from '@/components/PullRefreshList'
     export default {
         components:{
-            // [OrderList.name]:OrderList
+            [PullRefreshList.name]:PullRefreshList,
+            [OrderCard.name]:OrderCard
         },
         data() {
             return {
@@ -60,7 +68,7 @@
                 this.$router.go(-1)
             },
             onTabChange(name){ 
-              this.$router.replace('/order/list/'+name)
+            //   this.$router.replace('/order/list/'+name)
                 
             }
         }
