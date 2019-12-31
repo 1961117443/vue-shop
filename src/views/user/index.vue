@@ -52,7 +52,7 @@ export default {
   },
   methods:{
     onLinkClick(name){
-      this.$router.push({path:'/order',query:{tab:name}})
+      this.$router.push({name:'order',params:{tab:name,test:"abc"}})
     },
     getInfoCount(){
       this.$http.get('api/orders/state_count').then(res=>{

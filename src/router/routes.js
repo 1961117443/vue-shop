@@ -73,19 +73,7 @@ const routes = [
         showTabbar:false,
         title:"订单列表" 
       },
-      component: () => import('../views/order/index.vue') ,
-      children:[
-        {
-          path: 'list/:id',
-          name: '/order/list/:id',
-          meta:{
-            showNavbar:true,
-            showTabbar:false,
-            title:"订单列表" 
-          },
-          component: () => import('../views/order/list.vue')
-        }
-      ]
+      component: () => import('../views/order/index.vue')
     },
     {
       path: '/order/detail/:id',

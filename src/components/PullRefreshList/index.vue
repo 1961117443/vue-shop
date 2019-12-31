@@ -8,19 +8,7 @@
             finished-text="没有更多了"
             @load="onLoad"
             >
-            <slot :data="list">
-                <!-- <van-cell 
-                :title="url"
-                />
-                <van-cell 
-                :title="params.name"
-                />
-                <van-cell
-                    v-for="item in list"
-                    :key="item"
-                    :title="item"
-                /> -->
-            </slot>
+            <slot :data="list"></slot>
             </van-list>
         </van-pull-refresh>
     </div>
@@ -68,25 +56,10 @@
             onLoad() {
                 // 异步更新数据
                 setTimeout(() => {
-                    // for (let i = 0; i < 10; i++) {
-                    //     this.list.push(this.list.length + 1);
-                    // }
                     this.getApiData()
-
-                    // // 数据全部加载完成
-                    // if (this.list.length >= 40) {
-                    //     this.listFinished = true;
-                    // }
                 }, 500);
             },
             getApiData(){
-                // let count=10
-                // if (this.params.name=='sc') {
-                //     count=20
-                // }
-                //  for (let i = 0; i < count; i++) {
-                //     this.list.push(this.list.length + 1);
-                // }
                 this.$emit('on-handle-params',this.query)
                 
                 this.$http.get(this.url,this.query).then(res=>{
@@ -108,6 +81,6 @@
 
 <style lang="scss" scoped>
     .pull-refresh-list-container{
-
+        background-color: #eee;
     }
 </style>

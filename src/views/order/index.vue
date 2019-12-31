@@ -18,7 +18,12 @@
                <!-- <router-view/> -->
                <pull-refresh-list :url="'api/orders?type='+tab.name" :params="tab" >
                     <template v-slot="{data}">  
-                        <order-card v-for="item in data" :key="item.uuid" :order="item"/>
+                        <div v-if="data.length>0">
+                            <order-card v-for="item in data" :key="item.uuid" :order="item"/>
+                        </div>
+                        <div v-else class="empty-order">
+                            <h2>没有相关订单</h2>
+                        </div> 
                     </template>
                </pull-refresh-list>
             </van-tab>
@@ -27,8 +32,7 @@
     </div>
 </template>
 
-<script> 
-    // import OrderList from '@/components/Order/OrderList.vue'
+<script>
     import OrderCard from '@/components/Order/OrderCard.vue' 
     import PullRefreshList from '@/components/PullRefreshList'
     export default {
@@ -50,9 +54,10 @@
             };
         },
         created(){
-            if (this.$route.query.tab) {
+            let tabName= this.$route.params.tab 
+            if (tabName) {
                 this.tabs.some(item=> {
-                    if (item.name==this.$route.query.tab) {
+                    if (item.name==tabName) {
                         this.activeName = item.name
                         return true
                     }
@@ -76,5 +81,10 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .order-container{
+        .empty-order{
+           text-align: center;
+           padding: 50px 50px;
+        }
+    }
 </style>
