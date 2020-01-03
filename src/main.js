@@ -6,9 +6,11 @@ import http from './http'
 Vue.prototype.$http = http // 并发请求
 Vue.config.productionTip = false
 
-import { Lazyload } from 'vant';
 import './plugins/element.js'
 import './plugins/vant.js'
+
+import vueiInfinite from 'vue-infinite-scroll'
+Vue.use(vueiInfinite)
 
 new Vue({
   router,

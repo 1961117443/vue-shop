@@ -1,5 +1,5 @@
 <template>
-  <div  ref="container1">
+  <div class="home-container" ref="container1">
     <van-list
       v-model="loading"
       :finished="finished"
@@ -40,18 +40,12 @@
   </div>
 </template>
 
-<script>
-  import { List,Cell,CellGroup,Popup,Sticky  } from 'vant';
+<script> 
   import ChooseItem from '@/components/ChooseItem.vue'
   import CellSelect from '@/components/CellSelect'
   export default {
-    components:{
-      [List.name]:List,
-      [Cell.name]:Cell,
-      [ChooseItem.name]:ChooseItem,
-      [Popup.name]:Popup,
-      [CellGroup.name]:CellGroup,
-      [Sticky.name]:Sticky,
+    components:{ 
+      [ChooseItem.name]:ChooseItem, 
       [CellSelect.name]:CellSelect
     },
     data() {
@@ -107,7 +101,13 @@
 </script>
 
 <style lang="scss" scoped>
+.home-container{
   .cell-test-group{
     text-align: left;
   }
+    ::-webkit-scrollbar {
+              display: none;
+  } 
+}
+  
 </style>

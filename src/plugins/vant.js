@@ -26,9 +26,10 @@ import {
     Toast,
     GoodsActionIcon,
     GoodsActionButton,
-    Search, Tabbar, TabbarItem, Dialog,Popup 
+    Search, Tabbar, TabbarItem, Dialog,Popup ,Loading 
 } from 'vant'
 Vue.use(Tabbar)
+Vue.use(Loading)
 Vue.use(TabbarItem)
 Vue.use(Popup)
 Vue.use(Dialog)

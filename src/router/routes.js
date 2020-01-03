@@ -61,7 +61,8 @@ const routes = [
       meta:{
         showNavbar:true,
         showTabbar:false,
-        title:"型材型号" 
+        title:"型材型号",
+        keepAlive: true
       },
       component: () => import('../views/goods/list.vue')
     },
