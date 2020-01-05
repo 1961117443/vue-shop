@@ -25,3 +25,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 * 型号详情加购
 * 购物车删除
 * 购物车提交订单
+* 订单管理删除、关闭、审价
