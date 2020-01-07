@@ -9,7 +9,7 @@
         >
             <search-panel></search-panel>
         </van-popup> -->
-        <search-panel v-model="showSearchPanel" @on-search="onSearch"></search-panel>
+        <search-panel v-model="showSearchPanel" history-key="goods" @on-search="onSearch"></search-panel>
     </div>
     <div class="goods-list-container"> 
     <div class="goods-item" v-for="item in goodsList" :key="item.id" @click="onClick(item)">
