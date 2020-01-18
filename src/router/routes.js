@@ -80,6 +80,21 @@ const routes = [
       path: '/order/detail/:id',
       name: '/order/detail/:id',
       component: () => import('../views/order/detail.vue')
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: () => import('../views/Test.vue')
+    },
+    {
+      path: '/callback',
+      name: 'callback',
+      component: () => import('../views/auth/CallBack.vue')
+    },
+    {
+      path: '/oidc-client',
+      name: 'oidc-client',
+      component: () => import('../views/auth/OidcClient.vue')
     }
   ]
   
